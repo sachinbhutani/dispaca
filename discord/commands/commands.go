@@ -6,7 +6,7 @@ import (
 	"github.com/sachinbhutani/sapphire"
 )
 
-//Init - Initalize bot commands
+//Init - Initialize bot commands
 func Init(bot *sapphire.Bot) {
 	//general commands
 	//ping command
