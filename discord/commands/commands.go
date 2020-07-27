@@ -18,5 +18,8 @@ func Init(bot *sapphire.Bot) {
 	bot.AddCommand(accountInfo)
 	mode := sapphire.NewCommand("mode", "Account", account.Mode).SetDescription("Account is in Paper trading or Live trading mode")
 	bot.AddCommand(mode)
+	balance := sapphire.NewCommand("balance", "Account", account.Balance).SetDescription("Account Balances")
+	balance.AddAliases("bal")
+	bot.AddCommand(balance)
 
 }

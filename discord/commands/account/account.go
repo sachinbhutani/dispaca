@@ -35,3 +35,22 @@ func Mode(ctx *sapphire.CommandContext) {
 	}
 	ctx.ReplyEmbedNoEdit(sapphire.NewEmbed().SetTitle("Live Trade").SetDescription("LIVE trading mode is On").SetColor(general.Green).Build())
 }
+
+//Balance - Display account balances
+func Balance(ctx *sapphire.CommandContext) {
+	acct, err := alpaca.Client.GetAccount()
+	if err != nil {
+		general.CommandError(ctx, "Error while fetching account information from Alpaca", err.Error())
+		return
+	}
+	desc := "Account# " + acct.AccountNumber + "\n Currency: " + acct.Currency + "\nBuying Power: " + acct.BuyingPower.String() + +"\nDay Trade Buying Power: " + acct.DaytradingBuyingPower.String() + "\nReg T Buying Power:" + acct.RegTBuyingPower.String()
+	portTitle := "Portfolio (MTM): " + acct.Equity.String()
+	portDetail := "Cash: " + acct.Cash + "\nLong Market Value: " + acct.LongMarketValue.String() + "\nShort Market Value: " + acct.ShortMarketValue.String()
+	lastEquity := "Last Equity Value: " + acct.LastEquity.String()
+	footer := "Account is in LIVE trading mode"
+	if alpaca.PaperTrade == true {
+		footer = "Account is in PAPER trading mode"
+	}
+	e := sapphire.NewEmbed().SetTitle("Alpaca Account Balance Details").SetDescription(desc).SetColor(general.Blue).AddField(portTitle, portDetail).AddField("Previous Day Equity Value", lastEquity).SetFooter(footer)
+	ctx.ReplyEmbedNoEdit(e.MessageEmbed)
+}
