@@ -43,9 +43,9 @@ func Balance(ctx *sapphire.CommandContext) {
 		general.CommandError(ctx, "Error while fetching account information from Alpaca", err.Error())
 		return
 	}
-	desc := "Account# " + acct.AccountNumber + "\n Currency: " + acct.Currency + "\nBuying Power: " + acct.BuyingPower.String() + +"\nDay Trade Buying Power: " + acct.DaytradingBuyingPower.String() + "\nReg T Buying Power:" + acct.RegTBuyingPower.String()
+	desc := "Account# " + acct.AccountNumber + "\nCurrency: " + acct.Currency + "\nBuying Power: " + acct.BuyingPower.String() + "\nDay Trade Buying Power: " + acct.DaytradingBuyingPower.String() + "\nReg T Buying Power: " + acct.RegTBuyingPower.String()
 	portTitle := "Portfolio (MTM): " + acct.Equity.String()
-	portDetail := "Cash: " + acct.Cash + "\nLong Market Value: " + acct.LongMarketValue.String() + "\nShort Market Value: " + acct.ShortMarketValue.String()
+	portDetail := "Cash: " + acct.Cash.String() + "\nLong Market Value: " + acct.LongMarketValue.String() + "\nShort Market Value: " + acct.ShortMarketValue.String()
 	lastEquity := "Last Equity Value: " + acct.LastEquity.String()
 	footer := "Account is in LIVE trading mode"
 	if alpaca.PaperTrade == true {
